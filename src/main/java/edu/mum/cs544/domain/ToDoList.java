@@ -27,7 +27,7 @@ public class ToDoList {
 	@Column(columnDefinition = "varchar(2048)")
 	private String description;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate;
+	private Date createdDate = new Date();
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifiedDate;
 	@Temporal(TemporalType.DATE)

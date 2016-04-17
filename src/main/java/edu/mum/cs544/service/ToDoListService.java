@@ -43,4 +43,21 @@ public class ToDoListService {
 				return toDoListDao.findAllByOrderByTitleAsc(title);						 
 		}
 
+		public Long save(ToDoList toDoList) {
+			return toDoListDao.save(toDoList).getToDoListId();
+			
+		}
+
+		public List<ToDoList> findAll() {
+			return toDoListDao.findAll();
+		}
+
+		public ToDoList findById(Long id) {
+			return toDoListDao.findOne(id);
+		}
+
+		public void delete(Long id) {
+			toDoListDao.delete(id);
+		}
+
 }
