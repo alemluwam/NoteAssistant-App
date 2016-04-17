@@ -4,11 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class SectionController {
 
-	@RequestMapping("/")
+	@RequestMapping("/section")
 	public String home(){
-		return "index";
+		return "section";
 	}
 	
+	@RequestMapping("/section/add")
+	public String addSection(){
+		return "section_add";
+	}
 }

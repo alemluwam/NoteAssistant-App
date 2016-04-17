@@ -4,11 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class ContactController {
 
-	@RequestMapping("/")
+	@RequestMapping("/contact")
 	public String home(){
-		return "index";
+		return "contact";
 	}
 	
+	@RequestMapping("/contact/add")
+	public String addContact(){
+		return "contact_add";
+	}
 }
