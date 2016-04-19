@@ -7,30 +7,49 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 
 /**
- * @author haftomtesfay
+ * @author haftomtesfay & team
  *
  */
+
 @Entity
 public class Contact {
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long contactId;
+
 	@NotNull
+	@Column(columnDefinition = "varchar(60)")
 	private String contactName;
+
+	@Column(columnDefinition = "varchar(255)")
 	private String address;
+
+	@Column(columnDefinition = "varchar(32)")
 	private String homePhone;
+
+	@Column(columnDefinition = "varchar(32)")
 	private String mobile;
+
 	@Email
+	@Column(columnDefinition = "varchar(80)")
 	private String email;
+
 	@Column(columnDefinition = "varchar(2048)")
 	private String info;
-	
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "userId")
+	private User user;
+
 	public Contact() {
-		super();
+
 	}
 
 	public Long getContactId() {
@@ -88,5 +107,20 @@ public class Contact {
 	public void setInfo(String info) {
 		this.info = info;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Contact [contactId=" + contactId + ", contactName=" + contactName + ", address=" + address
+				+ ", homePhone=" + homePhone + ", mobile=" + mobile + ", email=" + email + ", info=" + info + ", user="
+				+ user + "]";
+	}
+
 }

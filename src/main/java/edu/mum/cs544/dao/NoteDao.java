@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import edu.mum.cs544.domain.Note;
+
 @Repository
 public interface NoteDao extends JpaRepository<Note, Long> {
 
@@ -25,7 +26,5 @@ public interface NoteDao extends JpaRepository<Note, Long> {
 	List<Note> findAllByOrderByModifiedDateDesc(Date modifiedDate);
 
 	List<Note> findAllByOrderByTitleAsc(String title);
-
-
 
 }

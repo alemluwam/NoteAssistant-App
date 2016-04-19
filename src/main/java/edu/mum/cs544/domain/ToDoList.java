@@ -9,29 +9,50 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author haftomtesfay
+ * @author haftomtesfay & team
  *
  */
+
 @Entity
 public class ToDoList {
 
 	@Id @GeneratedValue
 	private Long toDoListId;
+	
 	@NotNull
+	@Column(columnDefinition = "varchar(128)")
 	private String title;
+	
 	@Column(columnDefinition = "varchar(2048)")
 	private String description;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate = new Date();
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifiedDate;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dueDate;
+	
+	@Temporal(TemporalType.DATE)
+	private Date remainderStartDate;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "sectionId")
+	private Section section;
+	
+	public ToDoList() {
+		
+	}
+	
 	public Long getToDoListId() {
 		return toDoListId;
 	}
@@ -74,11 +95,8 @@ public class ToDoList {
 	public void setRemainderStartDate(Date remainderStartDate) {
 		this.remainderStartDate = remainderStartDate;
 	}
-	public ToDoList() {
-		super();
-	}
-	@Temporal(TemporalType.DATE)
-	private Date remainderStartDate;
+	
+	
 	
 	
 }

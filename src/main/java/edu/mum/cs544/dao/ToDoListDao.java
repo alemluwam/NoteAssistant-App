@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import edu.mum.cs544.domain.Note;
 import edu.mum.cs544.domain.ToDoList;
+
 @Repository
-public interface ToDoListDao extends JpaRepository<ToDoList, Long>{
+public interface ToDoListDao extends JpaRepository<ToDoList, Long> {
 
 	List<ToDoList> findByTitle(String title);
 
@@ -24,7 +25,5 @@ public interface ToDoListDao extends JpaRepository<ToDoList, Long>{
 	List<Note> findAllByOrderByModifiedDateDesc(Date modifiedDate);
 
 	List<Note> findAllByOrderByTitleAsc(String title);
-
-	
 
 }

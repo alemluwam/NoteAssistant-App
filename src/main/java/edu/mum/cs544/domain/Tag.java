@@ -12,9 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 /**
- * @author haftomtesfay
+ * @author haftomtesfay & team
  *
  */
+
 @Entity
 public class Tag {
 	@Id
@@ -26,7 +27,7 @@ public class Tag {
 	private List<Note> notes = new ArrayList<Note>();
 
 	public Tag() {
-		super();
+		
 	}
 
 	public Long getTagId() {

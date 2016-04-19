@@ -6,15 +6,16 @@ package edu.mum.cs544.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+//import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author haftomtesfay
+ * @author haftomtesfay & team
  *
  */
 @Entity
@@ -22,21 +23,26 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Long userId;
+
 	@NotNull
+	@Column(columnDefinition = "varchar(32)")
 	private String userName;
+
 	@NotNull
+	@Column(columnDefinition = "varchar(32)")
 	private String password;
+
+	@Column(columnDefinition = "varchar(20)")
 	private String role;
 
-	@OneToMany
-	@JoinColumn(name="contactId")
+	@OneToMany(mappedBy = "user")
 	private List<Contact> contacts = new ArrayList<Contact>();
-	@OneToMany
-	@JoinColumn(name="sectionId")
+
+	@OneToMany(mappedBy = "user")
 	private List<Section> sections = new ArrayList<Section>();
-	
+
 	public User() {
-		super();
+
 	}
 
 	public Long getUserId() {
@@ -86,5 +92,6 @@ public class User {
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
 	}
-
+	
+	
 }

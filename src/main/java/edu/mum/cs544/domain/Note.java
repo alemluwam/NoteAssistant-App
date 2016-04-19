@@ -14,15 +14,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.URL;
 
 /**
- * @author haftomtesfay
+ * @author haftomtesfay & team
  *
  */
+
 @Entity
 public class Note {
 	@Id
@@ -30,23 +32,36 @@ public class Note {
 	private Long noteId;
 
 	@NotNull
+	@Column(columnDefinition = "varchar(80)")
 	private String title;
+	
 	@NotNull
 	@Column(columnDefinition = "varchar(4048)")
 	private String content;
+	
+	@Column(columnDefinition = "varchar(128)")
 	private String remark;
+	
 	@URL
+	@Column(columnDefinition = "varchar(128)")
 	private String link;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifiedDate;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "sectionId")
+	private Section section;
+	
 	@ManyToMany
 	@JoinTable(name = "Note_Tag", joinColumns = @JoinColumn(name = "noteId"), inverseJoinColumns = @JoinColumn(name = "tagId"))
 	private List<Tag> tags = new ArrayList<Tag>();
 	
 	public Note() {
-		super();
+		
 	}
 
 	public Long getNoteId() {
@@ -105,6 +120,14 @@ public class Note {
 		this.modifiedDate = modifiedDate;
 	}
 
+	public Section getSection() {
+		return section;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
+	}
+
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -112,5 +135,7 @@ public class Note {
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
+
+	
 	
 }

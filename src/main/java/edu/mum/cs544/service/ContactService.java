@@ -3,70 +3,97 @@ package edu.mum.cs544.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import edu.mum.cs544.dao.ContactDao;
 import edu.mum.cs544.domain.Contact;
 
-
 @Service
 public class ContactService {
-	
+
 	@Autowired
 	private ContactDao contactDao;
 
-	// Search
+	/* All Contacts */
+	public List<Contact> findAll() {
+		return contactDao.findAll();
+	}
+
+	/* All Contacts | Sorted by ID */
+	public List<Contact> findAllByContactId(boolean sort) {
+		if (sort) {
+			return contactDao.findAllByOrderByContactIdAsc();
+		} else {
+			return contactDao.findAllByOrderByContactIdDesc();
+		}
+	}
+
+	/* All Contacts | Sorted by Name */
+	public List<Contact> findAllByName(boolean sort) {
+		if (sort) {
+			return contactDao.findAllByOrderByContactNameAsc();
+		} else {
+			return contactDao.findAllByOrderByContactNameDesc();
+		}
+	}
+
+	/* All Contacts | Sorted by Address */
+	public List<Contact> findAllByAddress(boolean sort) {
+		if (sort) {
+			return contactDao.findAllByOrderByAddressAsc();
+		} else {
+			return contactDao.findAllByOrderByAddressDesc();
+		}
+	}
+
+	/* All Contacts | Sorted by Mobile */
+	public List<Contact> findAllByMobile(boolean sort) {
+		if (sort) {
+			return contactDao.findAllByOrderByMobileAsc();
+		} else {
+			return contactDao.findAllByOrderByMobileDesc();
+		}
+	}
+
+	/* All Contacts | Sorted by Email */
+	public List<Contact> findAllByEmail(boolean sort) {
+		if (sort) {
+			return contactDao.findAllByOrderByEmailAsc();
+		} else {
+			return contactDao.findAllByOrderByEmailDesc();
+		}
+	}
+
+	/* Find Contact by Name */
 	public List<Contact> findByContactName(String contactName) {
-		return contactDao.findByContactName(contactName);
+		return contactDao.findByContactname2(contactName);
 	}
 
+	/* Find Contact by Email */
 	public List<Contact> findByEmail(String email) {
-		return contactDao.findByEmail(email);
+		return contactDao.findByEmailLike(email);
 	}
 
-	public List<Contact> findByHomePhone(String homePhone) {
-		return contactDao.findByHomePhone(homePhone);
+	/* Find Contact by HomePhone */
+	public List<Contact> findByPhone(String phone) {
+		return contactDao.findByPhoneLike(phone, phone);
 	}
 
+	/* Find Contact by Address */
 	public List<Contact> findByAddress(String address) {
-		return contactDao.findByAddress(address);
+		return contactDao.findByAddressLike(address);
 	}
-
-	public List<Contact> findByMobile(String mobile) {
-		return contactDao.findByMobile(mobile);
-	}
-
-	// Sort
-
-	public List<Contact> SortByContactNameAsc(String contactName) {
-		return contactDao.findAllByOrderByContactNameAsc(contactName);
-	}
-
-	public List<Contact> SortByContactNameDesc(String contactName) {
-		return contactDao.findAllByOrderByContactNameDesc(contactName);
-	}
-
-	public List<Contact> SortByAddressAsc(String address) {
-		return contactDao.findAllByOrderByAddressAsc(address);
-	}
-
-	public List<Contact> SortByAddressDesc(String address) {
-		return contactDao.findAllByOrderByAddressDesc(address);
-	}
-
-	public List<Contact> SortByEmailAsc(String email) {
-		return contactDao.findAllByOrderByEmailAsc(email);
-	}
-
-	public List<Contact> SortByEmailDesc(String email) {
-		return contactDao.findAllByOrderByEmailDesc(email);
-	}
-
-	public ContactDao getContactDao() {
-		return contactDao;
-	}
-
-	public void setContactDao(ContactDao contactDao) {
-		this.contactDao = contactDao;
-	}
-
 	
+	/* not used below this one */
+	public Contact findById(Long id) {
+		return contactDao.findOne(id);
+	}
+
+	public void delete(Long id) {
+		contactDao.delete(id);
+	}
+	
+	/* SAVE */
+	public Long save(Contact contact) {
+		return contactDao.save(contact).getContactId();
+	}
 }
