@@ -119,7 +119,7 @@ public class TodoController {
 		return "redirect:/todo";
 	}
 
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable("id") Long id, Model model) {
 		ToDoList t = toDoListService.findById(id);
 		System.out.println(t == null ? "It's null" : "It's not null");
@@ -129,7 +129,7 @@ public class TodoController {
 		return "todo/todo_add";
 	}
 
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public String editToDoList(@ModelAttribute("newToDoList") ToDoList t, @PathVariable("id") Long id) {
 		t.setToDoListId(id);
 		toDoListService.save(t);

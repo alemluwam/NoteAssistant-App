@@ -105,7 +105,7 @@
 										${toDoList.dueDate} | <a
 										href="todo/delete/${toDoList.toDoListId }"><b>Delete&nbsp;</b></a>
 										| <a
-										href="todo/edit/${toDoList.toDoListId }"><b>Update&nbsp;</b></a>
+										href="todo/${toDoList.toDoListId }"><b>Update&nbsp;</b></a>
 										</span><br />
 									${toDoList.description }
 								</div>

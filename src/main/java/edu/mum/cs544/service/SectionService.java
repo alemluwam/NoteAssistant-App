@@ -11,8 +11,10 @@ import edu.mum.cs544.domain.User;
 
 @Service
 public class SectionService {
+	
 	@Autowired
 	private SectionDao sectionDao;
+	
 	@Autowired
 	private UserService userService;
 
