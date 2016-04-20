@@ -59,7 +59,7 @@
 			<div class="col-md-9">
 
 				<div class="jumbotron">
-					<h2>Contact Person</h2>
+					<h2><span class="glyphicon glyphicon-user"></span> Contact Person</h2>
 				</div>
 
 				<form:form modelAttribute="newContact" cssClass="form">

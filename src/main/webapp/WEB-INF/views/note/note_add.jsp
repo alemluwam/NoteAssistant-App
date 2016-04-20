@@ -31,7 +31,7 @@
     <![endif]-->
     <style>
         .jumbotron {
-            background-color: #40bbe1;
+            background-color: #77ab59;
         }
     </style>
 </head>
@@ -56,7 +56,7 @@
             <div class="col-md-9">
 
                 <div class="jumbotron">
-                    <h2>Note</h2> 
+                    <h2><span class="glyphicon glyphicon-list-alt"></span> Note</h2> 
 				</div>
 			
 			<form role="form" method="post" action="">

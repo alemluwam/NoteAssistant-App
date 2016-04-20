@@ -55,7 +55,7 @@
 
 			<div class="col-md-9">
 				<div class="jumbotron">
-					<h2>Contact List</h2>
+					<h2><span class="glyphicon glyphicon-user"></span> Contact List</h2>
 				</div>
 
 				<div class="col-md-15">

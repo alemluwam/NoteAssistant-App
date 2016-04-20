@@ -30,7 +30,7 @@
     <![endif]-->
     <style>
         .jumbotron {
-            background-color: #77ab59;
+            background-color: #40bbe1;
         }
     </style>
 </head>
