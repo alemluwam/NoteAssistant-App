@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,7 +37,7 @@ public class Section {
 	@OneToMany(mappedBy = "section")
 	private List<Note> notes = new ArrayList<Note>();
 
-	@OneToMany(mappedBy = "section")
+	@OneToMany(mappedBy = "section", fetch=FetchType.EAGER)
 	private List<ToDoList> toDoLists = new ArrayList<ToDoList>();
 
 	@ManyToOne(optional = false)

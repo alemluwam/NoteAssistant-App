@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import edu.mum.cs544.dao.ToDoListDao;
 import edu.mum.cs544.domain.Note;
 import edu.mum.cs544.domain.ToDoList;
+import edu.mum.cs544.domain.User;
 
 @Service
 public class ToDoListService {

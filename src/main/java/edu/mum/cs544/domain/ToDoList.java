@@ -37,7 +37,7 @@ public class ToDoList {
 	private Date createdDate = new Date();
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifiedDate;
+	private Date modifiedDate = new Date();
 	
 	@Temporal(TemporalType.DATE)
 	private Date dueDate;
@@ -94,6 +94,14 @@ public class ToDoList {
 	}
 	public void setRemainderStartDate(Date remainderStartDate) {
 		this.remainderStartDate = remainderStartDate;
+	}
+
+	public Section getSection() {
+		return section;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
 	}
 	
 	
