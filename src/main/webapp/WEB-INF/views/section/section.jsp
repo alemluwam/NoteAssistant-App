@@ -68,16 +68,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:if test="${not empty sections}">
+						<c:forEach items="${sections}" var="section" varStatus="count">
                             <tr>
-                                <th>Maths</th>
-                                <td>Theme5</td>
+                                <th>${section.sectionName}</th>
+                                <td>${section.theme}</td>
 
                             </tr>
-                            <tr>
-                                <th>Programming</th>
-                                <td>Theme3</td>
-
-                            </tr>
+						</c:forEach>
+					</c:if>
                         </tbody>
                     </table>
                 </div>
