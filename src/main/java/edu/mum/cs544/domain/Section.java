@@ -96,5 +96,9 @@ public class Section {
 		this.user = user;
 	}
 	
+	public String toString(){
+		
+		return sectionName;
+	}
 	
 }
