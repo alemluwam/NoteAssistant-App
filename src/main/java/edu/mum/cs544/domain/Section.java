@@ -40,8 +40,8 @@ public class Section {
 	@OneToMany(mappedBy = "section", fetch=FetchType.EAGER)
 	private List<ToDoList> toDoLists = new ArrayList<ToDoList>();
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "userId")
+	@ManyToOne
+	@JoinColumn(name = "userId") 	// field name will be [userId] instead of [user_userId] in Section Table
 	private User user;
 
 	public Section() {
