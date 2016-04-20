@@ -45,6 +45,9 @@ public class User {
 
 	}
 
+	
+	
+	// GETTERS and SETTERS
 	public Long getUserId() {
 		return userId;
 	}
@@ -92,6 +95,12 @@ public class User {
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
 	}
-	
+
+
+	// TO STRING
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + "]";
+	}
 	
 }

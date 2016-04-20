@@ -39,5 +39,14 @@ public class SectionService {
 	public Section findOne(Long id) {
 		return sectionDao.findOne(id);
 	}
+	
+	public void delete(Long id) {
+		sectionDao.delete(id);
+	}
+	
+	/* SAVE */
+	public Long save(Section section) {
+		return sectionDao.save(section).getSectionId();
+	}
 
 }

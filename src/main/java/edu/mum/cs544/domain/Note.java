@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,38 +33,40 @@ public class Note {
 	private Long noteId;
 
 	@NotNull
-	@Column(columnDefinition = "varchar(80)")
+	@Column(columnDefinition = "varchar(128)")
 	private String title;
-	
+
 	@NotNull
-	@Column(columnDefinition = "varchar(4048)")
+	@Column(columnDefinition = "text(6000)")
 	private String content;
-	
+
 	@Column(columnDefinition = "varchar(128)")
 	private String remark;
-	
+
 	@URL
 	@Column(columnDefinition = "varchar(128)")
 	private String link;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifiedDate;
-	
-	@ManyToOne(optional = false)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "sectionId")
 	private Section section;
-	
+
 	@ManyToMany
 	@JoinTable(name = "Note_Tag", joinColumns = @JoinColumn(name = "noteId"), inverseJoinColumns = @JoinColumn(name = "tagId"))
 	private List<Tag> tags = new ArrayList<Tag>();
-	
+
 	public Note() {
-		
+
 	}
 
+	
+	// GETTERS & SETTERS
 	public Long getNoteId() {
 		return noteId;
 	}
@@ -137,5 +140,11 @@ public class Note {
 	}
 
 	
+	// TO STRING
+	@Override
+	public String toString() {
+		return "Note [noteId=" + noteId + ", title=" + title + "]";
+	}
 	
+
 }

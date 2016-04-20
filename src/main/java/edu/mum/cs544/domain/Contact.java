@@ -25,7 +25,7 @@ public class Contact {
 	private Long contactId;
 
 	@NotNull
-	@Column(columnDefinition = "varchar(60)")
+	@Column(columnDefinition = "varchar(80)")
 	private String contactName;
 
 	@Column(columnDefinition = "varchar(255)")
@@ -41,17 +41,18 @@ public class Contact {
 	@Column(columnDefinition = "varchar(80)")
 	private String email;
 
-	@Column(columnDefinition = "varchar(2048)")
+	@Column(columnDefinition = "text(4000)")
 	private String info;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "userId")	// field name will be [userId] instead of [user_userId]
 	private User user;
 
 	public Contact() {
 
 	}
 
+	// GETTERS & SETTERS
 	public Long getContactId() {
 		return contactId;
 	}
@@ -116,11 +117,10 @@ public class Contact {
 		this.user = user;
 	}
 
+	// TOSTRING
 	@Override
 	public String toString() {
-		return "Contact [contactId=" + contactId + ", contactName=" + contactName + ", address=" + address
-				+ ", homePhone=" + homePhone + ", mobile=" + mobile + ", email=" + email + ", info=" + info + ", user="
-				+ user + "]";
+		return "Contact [contactId=" + contactId + ", contactName=" + contactName + "]";
 	}
-
+	
 }

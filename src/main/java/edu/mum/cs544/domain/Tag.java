@@ -29,7 +29,9 @@ public class Tag {
 	public Tag() {
 		
 	}
-
+	
+	
+	// GETTERS & SETTERS
 	public Long getTagId() {
 		return tagId;
 	}

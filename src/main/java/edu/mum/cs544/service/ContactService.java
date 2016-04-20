@@ -1,6 +1,7 @@
 package edu.mum.cs544.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -83,7 +84,6 @@ public class ContactService {
 		return contactDao.findByAddressLike(address);
 	}
 	
-	/* not used below this one */
 	public Contact findById(Long id) {
 		return contactDao.findOne(id);
 	}
