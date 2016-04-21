@@ -48,10 +48,10 @@ public class Note {
 	private String link;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate;
+	private Date createdDate = new Date();
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifiedDate;
+	private Date modifiedDate = new Date();
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "sectionId")
@@ -143,7 +143,7 @@ public class Note {
 	// TO STRING
 	@Override
 	public String toString() {
-		return "Note [noteId=" + noteId + ", title=" + title + "]";
+		return "Note [noteId=" + noteId + ", title=" + title + section.getSectionName() + "]";
 	}
 	
 

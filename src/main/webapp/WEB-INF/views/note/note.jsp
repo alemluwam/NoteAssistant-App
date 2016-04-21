@@ -67,14 +67,14 @@
 							<label for="section">Search </label>
 						</div>
 						<div class="form-group">
-							<select
-								class="form-control input-lg" id="section" name="section">
-								<!-- replace by dynamic -->
-								<option value="1">Section A</option>
-								<option value="2">Section B</option>
-								<option value="3">Section C</option>
+						
+							<select class="form-control input-lg" id="section" name="section">
+								<!-- Dynamic Sections -->
+								<c:forEach items="${sections}" var="section">
+									<option value="${section.sectionId}">${section.sectionName}</option>
+								</c:forEach>
 							</select>
-							<input type="text" class="form-control input-lg" name="search" id="search" size="38" />
+							<input type="text" class="form-control input-lg" name="search" id="search" size="33" />
 							<select class="form-control input-lg" name="searchby" id="searchby">
 								<option value="title">Title</option>
 								<option value="text">Text</option>

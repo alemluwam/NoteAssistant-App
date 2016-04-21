@@ -59,7 +59,7 @@
                     <h2><span class="glyphicon glyphicon-list-alt"></span> Note</h2> 
 				</div>
 			
-			<form role="form" method="post" action="">
+			<form:form modelAttribute="newNote" cssClass="form">
 				
 				<div class="well">
                     <div class="row">
@@ -75,44 +75,59 @@
 					<label for="title">
 						Title
 					</label>
-					<input type="text" class="form-control" name="title" id="title" placeholder="Title of the note" value="" required />
+					<!-- <input type="text" class="form-control" name="title" id="title" placeholder="Title of the note" value="" required /> -->
+					<form:input path="title" cssClass="form-control" placeholder="Title of the note" required="required" />
+					<form:errors path="title" cssClass="has-error" />
 				</div>
 				
 				<div class="form-group">
 					<label for="content">Content</label>
-					<textarea class="form-control" rows="10" name="content" id="content" placeholder="Content of the note" required></textarea>
+					<!-- <textarea class="form-control" rows="10" name="content" id="content" placeholder="Content of the note" required></textarea>  -->
+					<form:textarea path="content" cssClass="form-control" rows="10" placeholder="Content of the note" required="required" />
+					<form:errors path="content" cssClass="has-error" />
 				</div>
 				
+				<!-- 
 				<div class="form-group">
 					<label for="tags">
 						Tags
 					</label>
 					<input type="text" class="form-control" name="tags" id="tags" value="" />
 				</div>
+				 -->
 				
 				<div class="form-group">
-					<label for="tags">
+					<label for="remark">
 						Remark
 					</label>
-					<input type="text" class="form-control" name="remark" id="remark" value="" />
+					<!-- <input type="text" class="form-control" name="remark" id="remark" value="" />  -->
+					<form:input path="remark" cssClass="form-control" placeholder="Remark" />
+					<form:errors path="remark" cssClass="has-error" />
 				</div>
 				
 				<div class="form-group">
-					<label for="tags">
+					<label for="link">
 						Link
 					</label>
-					<input type="url" class="form-control" name="link" id="link" placeholder="URL of note (if any)" value="" />
+					<!-- <input type="url" class="form-control" name="link" id="link" placeholder="URL of note (if any)" value="" />  -->
+					<form:input type="url" path="link" cssClass="form-control" placeholder="URL of note (if any)" />
 				</div>
 				
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="section">Section</label>
 					<select class="form-control" name="section" id="section">
-						<option value="#e6d273">Section A</option>
-						<option value="#c9df8a">Section B</option>
-						<option value="#77ab59">Section C</option>
+						<option value="1">Section A</option>
 					</select>
+				</div>  -->
+					
+				<div class="form-group">
+				<label for="section">Section</label>
+				<form:select cssClass="form-control" path="section">
+					<%-- <form:option value="-" label="--Please Select --"/> --%>
+					<form:options items="${sections}" itemValue="sectionId" itemLabel="sectionName"/>
+				</form:select>
 				</div>
-				
+					
 				<div class="text-right">
 					<button type="submit" class="btn-lg btn-primary">
 						Save
@@ -121,7 +136,7 @@
 						Clear
 					</button>
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div> <!-- /.row -->
     </div>

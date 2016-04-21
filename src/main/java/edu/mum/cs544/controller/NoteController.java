@@ -1,8 +1,14 @@
 package edu.mum.cs544.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,24 +17,66 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mum.cs544.domain.Note;
 import edu.mum.cs544.domain.Section;
+import edu.mum.cs544.domain.User;
 import edu.mum.cs544.service.NoteService;
+import edu.mum.cs544.service.SectionService;
+import edu.mum.cs544.service.UserService;
 
+/**
+ * @author Siken MS Dongol
+ *
+ */
 @Controller
 @RequestMapping("/note")
 public class NoteController {
 
 	@Autowired
+	private SectionService sectionService;
+
+	@Autowired
 	private NoteService noteService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String Note(Model model) {
+	@Autowired
+	private UserService userService;
 
-		model.addAttribute("notes", noteService.findAll());
+	@ModelAttribute("sections")
+	public List<Section> getSections() {
+		User user = userService.findOne(1L);
+		return (user != null) ? sectionService.findByUserId(user.getUserId()) : null;
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String Note(Model model, @ModelAttribute("sections") List<Section> sections) {
+		List<Note> notes = new ArrayList<>();
+		for (Section section : sections) {
+			notes.addAll(section.getNotes());
+		}
+		model.addAttribute("notes", notes);
 		return "note/note";
+	}
+	
+	// Display Add -- Form
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String addNote(Model model) {
+		model.addAttribute("newNote", new Note());
+		return "note/note_add";
+	}
+
+	// SAVE ADD -- NOTE
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String saveNote(@Valid @ModelAttribute("newNote") Note note, Model model, BindingResult result) {
+		String view = "redirect:/note";
+		if (result.hasErrors()) {
+			view = "note_add";
+		} else {
+			noteService.save(note);
+		}
+		return view;
 	}
 
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
-	public String NoteFind(Model model, @RequestParam("search") String search, @RequestParam("searchby") String searchby, @RequestParam("section") Long sectionId) {
+	public String NoteFind(Model model, @RequestParam("search") String search,
+			@RequestParam("searchby") String searchby, @RequestParam("section") Long sectionId) {
 		switch (searchby) {
 		case "text":
 			model.addAttribute("notes", noteService.findByContent(search, sectionId));
@@ -72,45 +120,9 @@ public class NoteController {
 		return "note/note_ajax";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addNote(Model model) {
-		model.addAttribute("newNote", new Note());
-		return "note/note_add";
-	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String createNote(@ModelAttribute("newNote") Note note) {
-
-		/* under test */
-		Section newSection = new Section();
-		
-		newSection.setSectionId(1L);
-		newSection.setSectionName("Section A");
-		note.setSection(newSection);
-		
-		/* temporary solution */
-
-		noteService.save(note);
-		return "redirect:/note";
-	}
-
-	// UPDATE Load -----
-	@RequestMapping(value = "/{noteId}", method = RequestMethod.GET)
-	public String editNote(@PathVariable("noteId") Long id, Model model) {
-		model.addAttribute("newNote", noteService.findById(id));
-		return "note/note_add";
-	}
-
-	// UPDATE Save -----
-	@RequestMapping(value = "/{noteId}", method = RequestMethod.POST)
-	public String updateNote(@ModelAttribute("newNote") Note note) {
-		noteService.save(note);
-		return "redirect:/note";
-	}
-
-	// DELETE -----
+	// DELETE -- POST -- WORKING
 	@RequestMapping(value = "/delete/{Id}", method = RequestMethod.POST)
-	public String Delete(Model model, @PathVariable("Id") Long id) {
+	public String Delete2(Model model, @PathVariable("Id") Long id) {
 
 		if (noteService.findById(id) != null) {
 			noteService.delete(id);
@@ -121,11 +133,35 @@ public class NoteController {
 		return "note/note_ajax";
 	}
 
-	public NoteService getNoteService() {
-		return noteService;
+	// UPDATE LOAD -- WORKING
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String edit(@PathVariable("id") Long id, Model model) {
+		Note n = noteService.findById(id);
+		
+		model.addAttribute("newNote", n);
+		model.addAttribute("id", n.getNoteId());
+		return "note/note_add";
 	}
 
-	public void setNoteService(NoteService noteService) {
-		this.noteService = noteService;
+	// UPDATE SAVE -- WORKING
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public String editNote(@ModelAttribute("newNote") Note n, @PathVariable("id") Long id) {
+		n.setNoteId(id);
+
+		// Giving some error
+		// Calendar calendar = Calendar.getInstance();
+		// n.setModifiedDate(new
+		// java.sql.Timestamp(calendar.getTime().getTime())); // change modified
+		// date
+
+		noteService.save(n);
+		return "redirect:/note";
 	}
+
+	/*
+	 * @InitBinder public void initBinder(WebDataBinder binder) {
+	 * SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	 * dateFormat.setLenient(false); binder.registerCustomEditor(Date.class, new
+	 * CustomDateEditor(dateFormat, true)); }
+	 */
 }
