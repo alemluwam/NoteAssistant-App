@@ -62,7 +62,7 @@
 			<div class="col-md-9">
 
 				<div class="jumbotron">
-					<h2>ToDo</h2>
+					<h2><span class="glyphicon glyphicon-th-list"></span> ToDo</h2>
 				</div>
 
 				<form:form cssClass="form" modelAttribute="newToDoList" >

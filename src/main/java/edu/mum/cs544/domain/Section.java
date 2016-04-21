@@ -34,7 +34,7 @@ public class Section {
 	@Column(columnDefinition = "varchar(20)")
 	private String theme;
 
-	@OneToMany(mappedBy = "section")
+	@OneToMany(mappedBy = "section", fetch=FetchType.EAGER)
 	private List<Note> notes = new ArrayList<Note>();
 
 	@OneToMany(mappedBy = "section", fetch=FetchType.EAGER)

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +61,7 @@
 
 			<div class="col-md-9">
 				<div class="jumbotron">
-					<h2>ToDo List</h2>
+					<h2><span class="glyphicon glyphicon-th-list"></span> ToDo List</h2>
 				</div>
 
 				<div class="col-md-15">
@@ -95,17 +96,22 @@
 					<hr />
 					<!-- this will be the loop -->
 					<c:if test="${not empty toDoLists}">
-						<c:forEach items="${toDoLists}" var="toDoList">
+						<c:forEach items="${toDoLists}" var="toDoList" varStatus="count">
 							<div class="panel panel-warning show100">
 								<div class="panel-heading">
-									<h4>${toDoList.title }</h4>
+									<h4>
+									 	${count.count}. <span style="padding:2px;background-color:${toDoList.section.theme};">
+									 	<c:out value="${toDoList.section.sectionName}" /></span> | ${toDoList.title}
+									 </h4>
 								</div>
 								<div class="panel-body">
 									<span class="pull-right bg-danger"><b>Due:</b>
-										${toDoList.dueDate} | <a
-										href="todo/delete/${toDoList.toDoListId }"><b>Delete&nbsp;</b></a>
-										| <a
-										href="todo/${toDoList.toDoListId }"><b>Update&nbsp;</b></a>
+										${toDoList.dueDate}&nbsp;
+										<a href="${pageContext.request.contextPath}/todo/${toDoList.toDoListId}">
+											<button class="btn btn-cicle btn-xs btn-info">Upd</button>
+										</a><a href="todo/delete/${toDoList.toDoListId}">
+											<button class="btn btn-cicle btn-xs btn-danger">Del</button>
+										</a>
 										</span><br />
 									${toDoList.description }
 								</div>
