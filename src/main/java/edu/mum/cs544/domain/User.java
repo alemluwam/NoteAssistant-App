@@ -45,8 +45,6 @@ public class User {
 
 	}
 
-	
-	
 	// GETTERS and SETTERS
 	public Long getUserId() {
 		return userId;
