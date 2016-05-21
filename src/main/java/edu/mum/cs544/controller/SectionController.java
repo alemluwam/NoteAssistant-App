@@ -35,9 +35,6 @@ public class SectionController {
 		return "section/section_add";
 	}
 
-	// Luwam
-
-	// by Siken --
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String createSection(@ModelAttribute("newSection") Section section) {
 
